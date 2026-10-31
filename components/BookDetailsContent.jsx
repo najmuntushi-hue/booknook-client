@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
@@ -64,25 +65,37 @@ export default function BookDetailsContent({ id }) {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
-      <div className="card lg:card-side bg-base-100 shadow-xl">
-        <figure className="lg:w-2/5 h-96 lg:h-auto">
+    <div className="max-w-6xl mx-auto px-4 py-10">
+      <div className="grid gap-8 md:grid-cols-2 items-start">
+        <div className="rounded-xl overflow-hidden shadow-lg h-[480px]">
           <img src={book.image} alt={book.title} className="h-full w-full object-cover" />
-        </figure>
-        <div className="card-body lg:w-3/5">
-          <h1 className="text-3xl font-bold text-primary">{book.title}</h1>
-          <p className="opacity-80">by {book.author}</p>
+        </div>
+
+        <div className="flex flex-col gap-4">
           <div>
             <span className="badge badge-primary badge-outline">{book.category}</span>
           </div>
-          <p className="mt-2">{book.description}</p>
-          <p className="text-sm opacity-70">
-            Added by {book.userName} ({book.userEmail})
-          </p>
-          <p className="text-sm font-medium">
-            Available copies: {book.copies} / {book.totalCopies}
-          </p>
-          <div className="card-actions mt-4">
+          <h1 className="text-4xl font-bold">{book.title}</h1>
+          <p className="text-lg opacity-70">by {book.author}</p>
+
+          <div className="border border-base-300 rounded-xl p-4 bg-base-200">
+            <h3 className="font-semibold mb-1">Description</h3>
+            <p className="leading-relaxed">{book.description}</p>
+          </div>
+
+          <div className="border border-base-300 rounded-xl p-5 bg-base-200 grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-xs opacity-60">Added by</p>
+              <p className="font-semibold">{book.userName}</p>
+              <p className="text-xs opacity-60 break-all">{book.userEmail}</p>
+            </div>
+            <div>
+              <p className="text-xs opacity-60">Copies left</p>
+              <p className="font-semibold">{book.copies} / {book.totalCopies}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 mt-2">
             <button
               className="btn btn-primary"
               disabled={!available}
@@ -90,6 +103,9 @@ export default function BookDetailsContent({ id }) {
             >
               {available ? "Borrow This Book" : "Not Available"}
             </button>
+            <Link href="/books" className="link link-hover text-sm">
+              Back to all books
+            </Link>
           </div>
         </div>
       </div>
