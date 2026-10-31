@@ -10,8 +10,15 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="light">
-      <body className="min-h-screen flex flex-col">
+    <html lang="en" data-theme="light" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t){document.documentElement.setAttribute("data-theme",t)}}catch(e){}`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen flex flex-col bg-base-100 text-base-content">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

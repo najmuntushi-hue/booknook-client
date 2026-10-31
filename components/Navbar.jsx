@@ -1,4 +1,5 @@
 "use client";
+import ThemeToggle from "./ThemeToggle";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -58,6 +59,7 @@ export default function Navbar() {
       </div>
 
       <div className="navbar-end gap-2">
+        <ThemeToggle />
         {isPending ? (
           <span className="loading loading-spinner loading-sm"></span>
         ) : user ? (
