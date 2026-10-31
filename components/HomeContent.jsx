@@ -1,18 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
 import BookCard from "./BookCard";
 import Loader from "./Loader";
 
-const slides = [
-  { title: "Find Your Next Great Read", text: "Explore a growing collection of books shared by our readers.", bg: "from-indigo-600 to-purple-600" },
-  { title: "Borrow in Just One Click", text: "Pick a book, borrow it for seven days and enjoy reading.", bg: "from-emerald-600 to-teal-600" },
-  { title: "Share Your Own Books", text: "Add your books to BookNook and let others discover them.", bg: "from-rose-600 to-orange-500" },
-];
+const HeroSlider = dynamic(() => import("./HeroSlider"), {
+  ssr: false,
+  loading: () => <div className="h-[480px] bg-base-200"></div>,
+});
 
 const categories = [
   { name: "Fiction", icon: "📖" },
@@ -41,17 +37,7 @@ export default function HomeContent() {
 
   return (
     <div>
-      <Swiper modules={[Autoplay, Pagination]} autoplay={{ delay: 3500 }} pagination={{ clickable: true }} loop>
-        {slides.map((s) => (
-          <SwiperSlide key={s.title}>
-            <div className={`bg-gradient-to-r ${s.bg} text-white h-[420px] flex flex-col items-center justify-center text-center px-6`}>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">{s.title}</h1>
-              <p className="max-w-xl mb-6 text-lg">{s.text}</p>
-              <Link href="/books" className="btn btn-neutral">Browse Books</Link>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <HeroSlider />
 
       <section className="max-w-7xl mx-auto px-4 py-14">
         <h2 className="text-3xl font-bold text-center mb-8">New Arrivals</h2>
