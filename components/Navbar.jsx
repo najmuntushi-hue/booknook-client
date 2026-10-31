@@ -1,5 +1,6 @@
 "use client";
 import ThemeToggle from "./ThemeToggle";
+import Avatar from "./Avatar";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -64,10 +65,8 @@ export default function Navbar() {
           <span className="loading loading-spinner loading-sm"></span>
         ) : user ? (
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img alt="user" src={user.image || "https://i.ibb.co/2kR3q8z/user.png"} />
-              </div>
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle p-0">
+              <Avatar src={user.image} name={user.name} />
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
               <li className="px-3 py-2 font-semibold">{user.name}</li>
