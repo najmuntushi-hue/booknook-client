@@ -47,7 +47,9 @@ export default function HomeContent() {
           <p className="text-center opacity-70">No books added yet.</p>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {books.map((b) => <BookCard key={b._id} book={b} />)}
+            {books.map((b, i) => (
+              <BookCard key={b._id} book={b} index={i} />
+            ))}
           </div>
         )}
         <div className="text-center mt-8">
@@ -60,10 +62,14 @@ export default function HomeContent() {
           <h2 className="text-3xl font-bold text-center mb-8">Top Categories</h2>
           <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
             {categories.map((c) => (
-              <div key={c.name} className="card bg-base-100 shadow-md h-40 items-center justify-center">
+              <Link
+                key={c.name}
+                href={`/books?category=${c.name}`}
+                className="card bg-base-100 shadow-md h-40 items-center justify-center transition hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+              >
                 <span className="text-4xl">{c.icon}</span>
                 <p className="font-semibold mt-2">{c.name}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

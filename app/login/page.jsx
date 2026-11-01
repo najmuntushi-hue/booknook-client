@@ -44,13 +44,9 @@ function LoginForm() {
           <input name="password" type="password" placeholder="Password" className="input input-bordered w-full" required />
 
           <div className="text-right">
-            <button
-              type="button"
-              className="link link-hover text-sm"
-              onClick={() => toast("Password reset is not available yet")}
-            >
+            <Link href="/forgot-password" className="link link-hover text-sm">
               Forgot password?
-            </button>
+            </Link>
           </div>
 
           <button type="submit" className="btn btn-primary w-full" disabled={loading}>
