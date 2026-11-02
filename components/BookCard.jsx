@@ -2,6 +2,12 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+const PLACEHOLDER =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="100%" height="100%" fill="#e5e7eb"/><text x="50%" y="50%" fill="#6b7280" font-size="20" text-anchor="middle" dominant-baseline="middle">Image unavailable</text></svg>'
+  );
+
 export default function BookCard({ book, index = 0 }) {
   return (
     <motion.div
@@ -20,6 +26,11 @@ export default function BookCard({ book, index = 0 }) {
           className="h-full w-full object-cover"
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.4 }}
+          loading="lazy"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = PLACEHOLDER;
+          }}
         />
       </figure>
       <div className="card-body">
